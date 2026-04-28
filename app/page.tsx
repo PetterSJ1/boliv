@@ -1,15 +1,36 @@
-export default function Home() {
+import Link from 'next/link'
+import { createClient } from '@/app/lib/supabase/server'
+import { logout } from '@/app/actions/auth'
+
+export default async function Home() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
   return (
     <main className="min-h-screen bg-white dark:bg-zinc-950 flex flex-col">
       {/* Nav */}
       <nav className="flex items-center justify-between px-8 py-5 border-b border-zinc-100 dark:border-zinc-800">
         <span className="text-xl font-bold text-zinc-900 dark:text-white tracking-tight">boliv</span>
-        <a
-          href="#waitlist"
-          className="text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 px-4 py-2 rounded-full hover:opacity-80 transition-opacity"
-        >
-          Bli med
-        </a>
+        {user ? (
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-zinc-500 dark:text-zinc-400">{user.email}</span>
+            <form action={logout}>
+              <button
+                type="submit"
+                className="text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 px-4 py-2 rounded-full hover:opacity-80 transition-opacity"
+              >
+                Logg ut
+              </button>
+            </form>
+          </div>
+        ) : (
+          <Link
+            href="/login"
+            className="text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 px-4 py-2 rounded-full hover:opacity-80 transition-opacity"
+          >
+            Logg inn
+          </Link>
+        )}
       </nav>
 
       {/* Hero */}
