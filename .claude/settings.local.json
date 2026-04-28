@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m json.tool)",
+      "Bash(npm --version)",
+      "Bash(/opt/homebrew/bin/node --version)",
+      "Read(//usr/local/bin/**)",
+      "Bash(command -v brew)",
+      "Bash(brew --prefix)",
+      "Bash(/opt/homebrew/bin/brew --version)",
+      "Bash(npx --version)",
+      "Bash(gh auth *)",
+      "Bash(brew install *)",
+      "Read(//Users/petterjenssen/.nvm/versions/**)",
+      "Read(//opt/homebrew/**)",
+      "Bash(/opt/pmk/env/global/bin/node --version)",
+      "Skill(update-config)"
+    ]
+  }
+}
